@@ -1,9 +1,8 @@
+import 'package:f_banking/src/shared/widgets/dashboard.dart';
 import 'package:f_banking/src/shared/widgets/menu_icon_animation.dart';
 import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_flip_card/flipcard/flip_card.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
-import 'package:flutter_flip_card/modal/flip_side.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,47 +19,53 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: darkBlue,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Row(
-              children: [
-                AnimatedContainer(
-                  color: Colors.amber,
-                  width:
-                      isClicked
-                          ? MediaQuery.of(context).size.width / 8 + 16
-                          : 0,
-                  height: double.infinity,
-                  duration: Duration(milliseconds: 200),
-                ),
-                Flexible(
-                  child: Container(
-                    alignment: Alignment.center,
-                    // width: double.infinity,
-                    // height: double.infinity,
+      body: Stack(
+        children: [
+          Row(
+            children: [
+              buildDashboard(context, isClicked),
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  alignment: Alignment.topCenter,
+                  child: SingleChildScrollView(
                     child: Column(
                       children: [
+                        const SizedBox(height: 130),
                         FlipCard(
+                          animationDuration: Duration(milliseconds: 400),
+                          onTapFlipping: true,
                           frontWidget: Container(
                             width: MediaQuery.of(context).size.width,
                             height: 200,
                             color: Colors.green,
                             child: Text("data"),
                           ),
-                          backWidget: Container(),
+                          backWidget: Container(
+                            color: Colors.amber,
+                            width: double.infinity,
+                            height: 200,
+                          ),
                           controller: flipCardController,
                           rotateSide: RotateSide.bottom,
+                        ),
+                        const SizedBox(height: 20),
+                        Container(
+                          color: Colors.white,
+                          height: 40,
+                          width: double.infinity,
                         ),
                       ],
                     ),
                   ),
                 ),
-              ],
-            ),
-            Column(
+              ),
+            ],
+          ),
+          SafeArea(
+            child: Column(
               children: [
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 buildMenuIconAnimation(isClicked, () {
                   setState(() {
                     isClicked = !isClicked;
@@ -68,8 +73,8 @@ class _HomePageState extends State<HomePage> {
                 }),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
