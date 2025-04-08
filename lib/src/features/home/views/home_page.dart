@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 bool isClicked = false;
+bool showMore = false;
 FlipCardController flipCardController = FlipCardController();
 
 class _HomePageState extends State<HomePage> {
@@ -51,9 +52,68 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(height: 20),
                         Container(
-                          color: Colors.white,
-                          height: 40,
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          alignment: Alignment.center,
                           width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: List.generate(
+                                  4,
+                                  (index) => Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    showMore = !showMore;
+                                  });
+                                },
+                                child: ExpansionTile(
+                                  shape: Border.fromBorderSide(BorderSide.none),
+                                  collapsedShape: Border.fromBorderSide(
+                                    BorderSide.none,
+                                  ),
+                                  title:
+                                      showMore
+                                          ? Text("Show Less")
+                                          : Text("Show More"),
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: List.generate(
+                                        4,
+                                        (index) => Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius: BorderRadius.circular(
+                                              5,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
