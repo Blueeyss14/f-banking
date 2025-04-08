@@ -1,4 +1,4 @@
-import 'package:f_banking/src/shared/menu_icon_animation.dart';
+import 'package:f_banking/src/shared/widgets/menu_icon_animation.dart';
 import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
 
@@ -17,16 +17,31 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: darkBlue,
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            const SizedBox(height: 30),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  isClicked = !isClicked;
-                });
-              },
-              child: buildMenuIconAnimation(isClicked),
+            Row(
+              children: [
+                AnimatedContainer(
+                  color: Colors.amber,
+                  width:
+                      isClicked
+                          ? MediaQuery.of(context).size.width / 8 + 16
+                          : 0,
+                  height: double.infinity,
+                  duration: Duration(milliseconds: 300),
+                ),
+                Flexible(child: Container(color: Colors.green)),
+              ],
+            ),
+            Column(
+              children: [
+                const SizedBox(height: 30),
+                buildMenuIconAnimation(isClicked, () {
+                  setState(() {
+                    isClicked = !isClicked;
+                  });
+                }),
+              ],
             ),
           ],
         ),
