@@ -14,5 +14,23 @@ Widget buildDashboard(BuildContext context, bool isClicked) {
         right: BorderSide(width: borderSize, color: Colors.grey.withAlpha(120)),
       ),
     ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+          child: AnimatedContainer(
+            alignment: Alignment.center,
+            height: MediaQuery.of(context).size.width / 2 + 100,
+            decoration: BoxDecoration(
+              color: isClicked ? Colors.amber : Colors.transparent,
+
+              borderRadius: BorderRadius.horizontal(right: Radius.circular(10)),
+            ),
+            duration: Duration(milliseconds: 200),
+            child: Text("data", style: TextStyle(fontSize: isClicked ? 24 : 0)),
+          ),
+        ),
+      ],
+    ),
   );
 }
