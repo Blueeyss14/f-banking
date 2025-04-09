@@ -10,6 +10,10 @@ class ItemModel {
       {"icon": "assets/img/ewallet.png", "title": "E-Wallet"},
       {"icon": "assets/img/atm.png", "title": "F to Bank"},
       {"icon": "assets/img/top-up.png", "title": "Top-up"},
+      {"icon": "assets/img/transfer.png", "title": "Transfer"},
+      {"icon": "assets/img/transfer.png", "title": "Transfer"},
+      {"icon": "assets/img/transfer.png", "title": "Transfer"},
+      {"icon": "assets/img/transfer.png", "title": "Transfer"},
     ];
     return datas.map((data) => ItemModel(data["icon"], data["title"])).toList();
   }

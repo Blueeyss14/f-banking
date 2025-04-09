@@ -1,7 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:f_banking/src/features/home/models/item_model.dart';
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
-import 'package:f_banking/src/shared/widgets/dashboard.dart';
+import 'package:f_banking/src/shared/components/custom_dot_menu.dart';
+import 'package:f_banking/src/features/home/views/components/dashboard.dart';
 import 'package:f_banking/src/shared/widgets/menu_icon_animation.dart';
 import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dashboardProvider = Provider.of<DashboardProvider>(context);
-    bool showMore = false;
     FlipCardController flipCardController = FlipCardController();
 
     List<ItemModel> itemModel = ItemModel.itemData();
@@ -68,23 +68,49 @@ class HomePage extends StatelessWidget {
                             controller: flipCardController,
                             rotateSide: RotateSide.bottom,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(10),
+
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            height: 60,
                             child: Row(
                               children: [
-                                AutoSizeText(
-                                  maxLines: 1,
-                                  "128.4\$",
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.white,
+                                if (dashboardProvider.isVisible)
+                                  AutoSizeText(
+                                    maxLines: 1,
+                                    "128.4\$",
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                else
+                                  Row(
+                                    children: [
+                                      for (int i = 0; i < 5; i++)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 2,
+                                          ),
+                                          child: CustomDotMenu(),
+                                        ),
+                                    ],
                                   ),
-                                ),
+
                                 const SizedBox(width: 15),
-                                Icon(
-                                  Icons.visibility,
-                                  color: Colors.white,
-                                  size: 20,
+                                GestureDetector(
+                                  onTap: dashboardProvider.itemVisible,
+                                  child:
+                                      dashboardProvider.isVisible
+                                          ? Icon(
+                                            Icons.visibility,
+                                            color: Colors.white,
+                                            size: 20,
+                                          )
+                                          : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
                                 ),
                               ],
                             ),
@@ -96,107 +122,202 @@ class HomePage extends StatelessWidget {
                           const SizedBox(height: 10),
 
                           ///ITEM
-                          AnimatedContainer(
-                            padding: EdgeInsets.symmetric(
-                              vertical: dashboardProvider.isClicked ? 15 : 20,
-                            ),
-                            alignment: Alignment.center,
-                            width: double.infinity,
+                          Container(
+                            clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
                               color: darkBlue,
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 0.5,
-                                color: const Color(0xFF1C1E27).withAlpha(80),
+                              border: Border(
+                                top: BorderSide(
+                                  width: 0.2,
+                                  color: Colors.grey.withAlpha(80),
+                                ),
+                                right: BorderSide(
+                                  width: 0.5,
+                                  color: Colors.grey.withAlpha(80),
+                                ),
                               ),
                             ),
-                            duration: Duration(milliseconds: 200),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: List.generate(
-                                    4,
-                                    (index) => Column(
+                            child: AnimatedContainer(
+                              padding: EdgeInsets.symmetric(
+                                vertical: dashboardProvider.isClicked ? 15 : 20,
+                              ),
+                              alignment: Alignment.center,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: darkBlue,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width: 0.5,
+                                  color: const Color(0xFF1C1E27).withAlpha(50),
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 200),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: List.generate(
+                                      4,
+                                      (index) => Column(
+                                        children: [
+                                          AnimatedContainer(
+                                            alignment: Alignment.center,
+                                            padding: const EdgeInsets.all(10),
+                                            clipBehavior: Clip.antiAlias,
+                                            width: dashboardProvider.itemSize,
+                                            height: dashboardProvider.itemSize,
+                                            decoration: BoxDecoration(
+                                              color: darkBlue3,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border(
+                                                top: BorderSide(
+                                                  width: 0.5,
+                                                  color: Colors.grey.withAlpha(
+                                                    120,
+                                                  ),
+                                                ),
+                                                right: BorderSide(
+                                                  width: 0.5,
+                                                  color: Colors.grey.withAlpha(
+                                                    120,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            duration: Duration(
+                                              milliseconds: 200,
+                                            ),
+                                            child: Image.asset(
+                                              itemModel[index].image,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          AutoSizeText(
+                                            itemModel[index].title,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  // if (dashboardProvider.isItemClicked)
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: List.generate(
+                                      4,
+                                      (index) => Column(
+                                        children: [
+                                          AnimatedContainer(
+                                            alignment: Alignment.center,
+                                            padding: const EdgeInsets.all(10),
+                                            clipBehavior: Clip.antiAlias,
+                                            width:
+                                                !dashboardProvider.showMore
+                                                    ? 0
+                                                    : dashboardProvider
+                                                        .itemSize,
+                                            height:
+                                                !dashboardProvider.showMore
+                                                    ? 0
+                                                    : dashboardProvider
+                                                        .itemSize,
+                                            decoration: BoxDecoration(
+                                              color: darkBlue3,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border(
+                                                top: BorderSide(
+                                                  width: 0.5,
+                                                  color: Colors.grey.withAlpha(
+                                                    120,
+                                                  ),
+                                                ),
+                                                right: BorderSide(
+                                                  width: 0.5,
+                                                  color: Colors.grey.withAlpha(
+                                                    120,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            duration: Duration(
+                                              milliseconds: 200,
+                                            ),
+                                            child: Image.asset(
+                                              itemModel[index + 4].image,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          SizedBox(
+                                            height:
+                                                !dashboardProvider.showMore
+                                                    ? 0
+                                                    : null,
+                                            width:
+                                                !dashboardProvider.showMore
+                                                    ? 0
+                                                    : null,
+                                            child: AutoSizeText(
+                                              maxLines: 1,
+                                              itemModel[index + 4].title,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  AnimatedContainer(
+                                    height: dashboardProvider.showMore ? 15 : 0,
+                                    width: 10,
+                                    duration: Duration(milliseconds: 200),
+                                  ),
+                                  GestureDetector(
+                                    onTap: dashboardProvider.itemClicked,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        AnimatedContainer(
-                                          alignment: Alignment.center,
-                                          padding: const EdgeInsets.all(10),
-                                          clipBehavior: Clip.antiAlias,
-                                          width: dashboardProvider.itemSize,
-                                          height: dashboardProvider.itemSize,
-                                          decoration: BoxDecoration(
-                                            color: darkBlue3,
-                                            borderRadius: BorderRadius.circular(
-                                              5,
-                                            ),
-                                            border: Border(
-                                              top: BorderSide(
-                                                width: 0.5,
-                                                color: Colors.grey.withAlpha(
-                                                  120,
-                                                ),
+                                        dashboardProvider.showMore
+                                            ? Text(
+                                              "See Less",
+                                              style: TextStyle(
+                                                color: Colors.white,
                                               ),
-                                              right: BorderSide(
-                                                width: 0.5,
-                                                color: Colors.grey.withAlpha(
-                                                  120,
-                                                ),
+                                            )
+                                            : Text(
+                                              "See More",
+                                              style: TextStyle(
+                                                color: Colors.white,
                                               ),
                                             ),
-                                          ),
+                                        const SizedBox(width: 5),
+                                        AnimatedRotation(
+                                          curve: Curves.linearToEaseOut,
+                                          turns:
+                                              dashboardProvider.showMore
+                                                  ? 0
+                                                  : 0.5,
                                           duration: Duration(milliseconds: 200),
-                                          child: Image.asset(
-                                            itemModel[index].image,
+                                          child: Icon(
+                                            Icons.expand_less,
+                                            color: Colors.white,
                                           ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        AutoSizeText(
-                                          itemModel[index].title,
-                                          style: TextStyle(color: Colors.white),
                                         ),
                                       ],
                                     ),
                                   ),
-                                ),
-                                // ExpansionTile(
-                                //   collapsedIconColor: Colors.transparent,
-                                //   backgroundColor: Colors.transparent,
-                                //   onExpansionChanged: (value) {
-                                //     setState(() {
-                                //       showMore = !showMore;
-                                //     });
-                                //   },
-                                //   shape: Border.fromBorderSide(BorderSide.none),
-                                //   collapsedShape: Border.fromBorderSide(
-                                //     BorderSide.none,
-                                //   ),
-                                //   title:
-                                //       showMore
-                                //           ? Text("Show more")
-                                //           : Text("Show Less"),
-                                //   children: [
-                                //     Row(
-                                //       mainAxisAlignment:
-                                //           MainAxisAlignment.spaceAround,
-                                //       children: List.generate(
-                                //         4,
-                                //         (index) => Container(
-                                //           width: 40,
-                                //           height: 40,
-                                //           decoration: BoxDecoration(
-                                //             color: Colors.green,
-                                //             borderRadius: BorderRadius.circular(
-                                //               5,
-                                //             ),
-                                //           ),
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],
