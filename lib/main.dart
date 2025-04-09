@@ -1,5 +1,5 @@
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
-import 'package:f_banking/src/features/home/views/home_page.dart';
+import 'package:f_banking/src/features/home/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
   }
 }

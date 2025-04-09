@@ -70,47 +70,64 @@ class HomePage extends StatelessWidget {
                           ),
 
                           Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5),
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             height: 60,
-                            child: Row(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (dashboardProvider.isVisible)
-                                  AutoSizeText(
-                                    maxLines: 1,
-                                    "128.4\$",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                else
-                                  Row(
-                                    children: [
-                                      for (int i = 0; i < 5; i++)
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 2,
-                                          ),
-                                          child: CustomDotMenu(),
+                                Row(
+                                  children: [
+                                    if (dashboardProvider.isVisible)
+                                      AutoSizeText(
+                                        maxLines: 1,
+                                        "128.4\$",
+                                        style: TextStyle(
+                                          fontSize: 28,
+                                          color: Colors.white,
                                         ),
-                                    ],
-                                  ),
+                                      )
+                                    else
+                                      Row(
+                                        children: [
+                                          for (int i = 0; i < 5; i++)
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: 2,
+                                                  ),
+                                              child: CustomDotMenu(),
+                                            ),
+                                        ],
+                                      ),
 
-                                const SizedBox(width: 15),
-                                GestureDetector(
-                                  onTap: dashboardProvider.itemVisible,
-                                  child:
-                                      dashboardProvider.isVisible
-                                          ? Icon(
-                                            Icons.visibility,
-                                            color: Colors.white,
-                                            size: 20,
-                                          )
-                                          : Icon(
-                                            Icons.visibility_off,
-                                            color: Colors.white,
-                                            size: 20,
-                                          ),
+                                    const SizedBox(width: 15),
+                                    GestureDetector(
+                                      onTap: dashboardProvider.itemVisible,
+                                      child:
+                                          dashboardProvider.isVisible
+                                              ? Icon(
+                                                Icons.visibility,
+                                                color: Colors.white,
+                                                size: 20,
+                                              )
+                                              : Icon(
+                                                Icons.visibility_off,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                    ),
+                                  ],
+                                ),
+                                AutoSizeText(
+                                  maxLines: 1,
+                                  "Balance",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    height: 1,
+                                  ),
                                 ),
                               ],
                             ),
@@ -164,7 +181,7 @@ class HomePage extends StatelessWidget {
                                         children: [
                                           AnimatedContainer(
                                             alignment: Alignment.center,
-                                            padding: const EdgeInsets.all(10),
+                                            padding: const EdgeInsets.all(12),
                                             clipBehavior: Clip.antiAlias,
                                             width: dashboardProvider.itemSize,
                                             height: dashboardProvider.itemSize,
@@ -206,7 +223,6 @@ class HomePage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 15),
-                                  // if (dashboardProvider.isItemClicked)
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -277,7 +293,14 @@ class HomePage extends StatelessWidget {
                                     ),
                                   ),
                                   AnimatedContainer(
-                                    height: dashboardProvider.showMore ? 15 : 0,
+                                    height:
+                                        dashboardProvider.isClicked
+                                            ? dashboardProvider.showMore
+                                                ? 10
+                                                : 0
+                                            : dashboardProvider.showMore
+                                            ? 15
+                                            : 0,
                                     width: 10,
                                     duration: Duration(milliseconds: 200),
                                   ),
