@@ -1,33 +1,30 @@
+import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/shared/widgets/dashboard.dart';
 import 'package:f_banking/src/shared/widgets/menu_icon_animation.dart';
 import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-bool isClicked = false;
-bool showMore = false;
-FlipCardController flipCardController = FlipCardController();
-
-class _HomePageState extends State<HomePage> {
-  @override
   Widget build(BuildContext context) {
+    final dashboardProvider = Provider.of<DashboardProvider>(context);
+    bool showMore = false;
+    FlipCardController flipCardController = FlipCardController();
+
     return Scaffold(
       backgroundColor: darkBlue,
       body: Stack(
         children: [
           Row(
             children: [
-              buildDashboard(context, isClicked),
+              buildDashboard(context),
               Flexible(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   alignment: Alignment.topCenter,
                   child: SingleChildScrollView(
                     child: Column(
@@ -63,55 +60,57 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceEvenly,
                                 children: List.generate(
                                   4,
-                                  (index) => Container(
-                                    width: 40,
-                                    height: 40,
+                                  (index) => AnimatedContainer(
+                                    width: dashboardProvider.itemSize,
+                                    height: dashboardProvider.itemSize,
                                     decoration: BoxDecoration(
                                       color: Colors.green,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
+                                    duration: Duration(milliseconds: 200),
+                                    child: Icon(Icons.swap_horizontal_circle),
                                   ),
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    showMore = !showMore;
-                                  });
-                                },
-                                child: ExpansionTile(
-                                  shape: Border.fromBorderSide(BorderSide.none),
-                                  collapsedShape: Border.fromBorderSide(
-                                    BorderSide.none,
-                                  ),
-                                  title:
-                                      showMore
-                                          ? Text("Show Less")
-                                          : Text("Show More"),
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: List.generate(
-                                        4,
-                                        (index) => Container(
-                                          width: 40,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.green,
-                                            borderRadius: BorderRadius.circular(
-                                              5,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              // ExpansionTile(
+                              //   collapsedIconColor: Colors.transparent,
+                              //   backgroundColor: Colors.transparent,
+                              //   onExpansionChanged: (value) {
+                              //     setState(() {
+                              //       showMore = !showMore;
+                              //     });
+                              //   },
+                              //   shape: Border.fromBorderSide(BorderSide.none),
+                              //   collapsedShape: Border.fromBorderSide(
+                              //     BorderSide.none,
+                              //   ),
+                              //   title:
+                              //       showMore
+                              //           ? Text("Show more")
+                              //           : Text("Show Less"),
+                              //   children: [
+                              //     Row(
+                              //       mainAxisAlignment:
+                              //           MainAxisAlignment.spaceAround,
+                              //       children: List.generate(
+                              //         4,
+                              //         (index) => Container(
+                              //           width: 40,
+                              //           height: 40,
+                              //           decoration: BoxDecoration(
+                              //             color: Colors.green,
+                              //             borderRadius: BorderRadius.circular(
+                              //               5,
+                              //             ),
+                              //           ),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                             ],
                           ),
                         ),
@@ -126,11 +125,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                buildMenuIconAnimation(isClicked, () {
-                  setState(() {
-                    isClicked = !isClicked;
-                  });
-                }),
+                buildMenuIconAnimation(context),
               ],
             ),
           ),

@@ -1,11 +1,19 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-Widget buildDashboard(BuildContext context, bool isClicked) {
+Widget buildDashboard(BuildContext context) {
+  final dashboardProvider = Provider.of<DashboardProvider>(context);
   double borderSize = 0.5;
+  List<Color> colors = [Colors.red, Colors.blue, Colors.green];
   return AnimatedContainer(
+    curve: Curves.easeInOut,
     width:
-        isClicked ? MediaQuery.of(context).size.width / 8 + 15 + borderSize : 0,
+        dashboardProvider.isClicked
+            ? MediaQuery.of(context).size.width / 8 + 15 + borderSize
+            : 0,
     height: double.infinity,
     duration: Duration(milliseconds: 200),
     decoration: BoxDecoration(
@@ -18,16 +26,39 @@ Widget buildDashboard(BuildContext context, bool isClicked) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Flexible(
-          child: AnimatedContainer(
+          child: Container(
+            clipBehavior: Clip.antiAlias,
             alignment: Alignment.center,
-            height: MediaQuery.of(context).size.width / 2 + 100,
+            height: MediaQuery.of(context).size.width / 2,
             decoration: BoxDecoration(
-              color: isClicked ? Colors.amber : Colors.transparent,
+              color:
+                  dashboardProvider.isClicked
+                      ? Colors.amber
+                      : Colors.transparent,
 
               borderRadius: BorderRadius.horizontal(right: Radius.circular(10)),
             ),
-            duration: Duration(milliseconds: 200),
-            child: Text("data", style: TextStyle(fontSize: isClicked ? 24 : 0)),
+
+            child: Column(
+              children: List.generate(
+                3,
+                (index) => Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    color: colors[index],
+                    child: AutoSizeText("data", maxLines: 1),
+                  ),
+                ),
+              ),
+            ),
+
+            // AutoSizeText(
+            //   "data",
+            //   style: TextStyle(fontSize: isClicked ? 24 : 0),
+            //   maxFontSize: 24,
+            //   maxLines: 1,
+            // ),
           ),
         ),
       ],
