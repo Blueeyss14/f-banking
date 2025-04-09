@@ -3,7 +3,8 @@ import 'package:f_banking/src/features/home/models/item_model.dart';
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/shared/components/custom_dot_menu.dart';
 import 'package:f_banking/src/features/home/views/components/dashboard.dart';
-import 'package:f_banking/src/shared/widgets/menu_icon_animation.dart';
+import 'package:f_banking/src/shared/components/item.dart';
+import 'package:f_banking/src/features/home/views/components/menu_icon_animation.dart';
 import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
@@ -179,38 +180,15 @@ class HomePage extends StatelessWidget {
                                       4,
                                       (index) => Column(
                                         children: [
-                                          AnimatedContainer(
-                                            alignment: Alignment.center,
+                                          Item(
                                             padding: const EdgeInsets.all(12),
-                                            clipBehavior: Clip.antiAlias,
                                             width: dashboardProvider.itemSize,
                                             height: dashboardProvider.itemSize,
-                                            decoration: BoxDecoration(
-                                              color: darkBlue3,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border(
-                                                top: BorderSide(
-                                                  width: 0.5,
-                                                  color: Colors.grey.withAlpha(
-                                                    120,
-                                                  ),
-                                                ),
-                                                right: BorderSide(
-                                                  width: 0.5,
-                                                  color: Colors.grey.withAlpha(
-                                                    120,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            duration: Duration(
-                                              milliseconds: 200,
-                                            ),
                                             child: Image.asset(
                                               itemModel[index].image,
                                             ),
                                           ),
+
                                           const SizedBox(height: 5),
                                           AutoSizeText(
                                             itemModel[index].title,
@@ -230,10 +208,8 @@ class HomePage extends StatelessWidget {
                                       4,
                                       (index) => Column(
                                         children: [
-                                          AnimatedContainer(
-                                            alignment: Alignment.center,
+                                          Item(
                                             padding: const EdgeInsets.all(10),
-                                            clipBehavior: Clip.antiAlias,
                                             width:
                                                 !dashboardProvider.showMore
                                                     ? 0
@@ -244,28 +220,6 @@ class HomePage extends StatelessWidget {
                                                     ? 0
                                                     : dashboardProvider
                                                         .itemSize,
-                                            decoration: BoxDecoration(
-                                              color: darkBlue3,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border(
-                                                top: BorderSide(
-                                                  width: 0.5,
-                                                  color: Colors.grey.withAlpha(
-                                                    120,
-                                                  ),
-                                                ),
-                                                right: BorderSide(
-                                                  width: 0.5,
-                                                  color: Colors.grey.withAlpha(
-                                                    120,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            duration: Duration(
-                                              milliseconds: 200,
-                                            ),
                                             child: Image.asset(
                                               itemModel[index + 4].image,
                                             ),
