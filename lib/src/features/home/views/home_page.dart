@@ -18,7 +18,6 @@ class HomePage extends StatelessWidget {
     FlipCardController flipCardController = FlipCardController();
 
     List<ItemModel> itemModel = ItemModel.itemData();
-
     return Scaffold(
       backgroundColor: darkBlue,
       body: Stack(
@@ -30,19 +29,28 @@ class HomePage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   alignment: Alignment.topCenter,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    // clipBehavior: Clip.antiAlias,
-                    margin: const EdgeInsets.only(top: 130),
-                    decoration: BoxDecoration(
-                      color: darkBlue2,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: SingleChildScrollView(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      clipBehavior: Clip.antiAlias,
+                      margin: const EdgeInsets.only(top: 130),
+                      decoration: BoxDecoration(
+                        color: darkBlue2,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border(
+                          top: BorderSide(
+                            width: 0.5,
+                            color: Colors.grey.withAlpha(120),
+                          ),
+                          right: BorderSide(
+                            width: 0.5,
+                            color: Colors.grey.withAlpha(120),
+                          ),
+                        ),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // const SizedBox(height: 130),
                           FlipCard(
                             animationDuration: Duration(milliseconds: 400),
                             onTapFlipping: true,
@@ -60,25 +68,49 @@ class HomePage extends StatelessWidget {
                             controller: flipCardController,
                             rotateSide: RotateSide.bottom,
                           ),
-                          // const SizedBox(height: 20),
                           Padding(
                             padding: const EdgeInsets.all(10),
-                            child: AutoSizeText(
-                              "128.4\$",
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.white,
-                              ),
+                            child: Row(
+                              children: [
+                                AutoSizeText(
+                                  maxLines: 1,
+                                  "128.4\$",
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Icon(
+                                  Icons.visibility,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ],
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Divider(thickness: 0.3, height: 0),
+                          ),
+                          const SizedBox(height: 10),
+
+                          ///ITEM
+                          AnimatedContainer(
+                            padding: EdgeInsets.symmetric(
+                              vertical: dashboardProvider.isClicked ? 15 : 20,
+                            ),
                             alignment: Alignment.center,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: darkBlue,
                               borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                width: 0.5,
+                                color: const Color(0xFF1C1E27).withAlpha(80),
+                              ),
                             ),
+                            duration: Duration(milliseconds: 200),
                             child: Column(
                               children: [
                                 Row(
@@ -86,19 +118,45 @@ class HomePage extends StatelessWidget {
                                       MainAxisAlignment.spaceEvenly,
                                   children: List.generate(
                                     4,
-                                    (index) => AnimatedContainer(
-                                      padding: const EdgeInsets.all(10),
-                                      clipBehavior: Clip.antiAlias,
-                                      width: dashboardProvider.itemSize,
-                                      height: dashboardProvider.itemSize,
-                                      decoration: BoxDecoration(
-                                        color: darkBlue2,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      duration: Duration(milliseconds: 200),
-                                      child: Image.asset(
-                                        itemModel[index].image,
-                                      ),
+                                    (index) => Column(
+                                      children: [
+                                        AnimatedContainer(
+                                          alignment: Alignment.center,
+                                          padding: const EdgeInsets.all(10),
+                                          clipBehavior: Clip.antiAlias,
+                                          width: dashboardProvider.itemSize,
+                                          height: dashboardProvider.itemSize,
+                                          decoration: BoxDecoration(
+                                            color: darkBlue3,
+                                            borderRadius: BorderRadius.circular(
+                                              5,
+                                            ),
+                                            border: Border(
+                                              top: BorderSide(
+                                                width: 0.5,
+                                                color: Colors.grey.withAlpha(
+                                                  120,
+                                                ),
+                                              ),
+                                              right: BorderSide(
+                                                width: 0.5,
+                                                color: Colors.grey.withAlpha(
+                                                  120,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          duration: Duration(milliseconds: 200),
+                                          child: Image.asset(
+                                            itemModel[index].image,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        AutoSizeText(
+                                          itemModel[index].title,
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
