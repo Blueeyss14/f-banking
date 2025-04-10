@@ -10,6 +10,7 @@ class Item extends StatelessWidget {
   final void Function()? onTap;
   final Color? color;
   final Gradient? gradientColor;
+  final BorderRadiusGeometry? borderRadius;
   const Item({
     super.key,
     this.height,
@@ -20,6 +21,7 @@ class Item extends StatelessWidget {
     this.onTap,
     this.color,
     this.gradientColor,
+    this.borderRadius,
   });
 
   @override
@@ -36,7 +38,7 @@ class Item extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: gradientColor,
           color: color ?? darkBlue3,
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: borderRadius ?? BorderRadius.circular(5),
           border: Border(
             top: BorderSide(width: 0.5, color: Colors.grey.withAlpha(120)),
             right: BorderSide(width: 0.5, color: Colors.grey.withAlpha(120)),

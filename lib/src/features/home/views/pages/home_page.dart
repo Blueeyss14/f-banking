@@ -5,7 +5,7 @@ import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/features/home/viewmodels/scroll_page_provider.dart';
 import 'package:f_banking/src/features/home/views/widgets/ewallet_history.dart';
 import 'package:f_banking/src/features/home/views/widgets/income_expense.dart';
-import 'package:f_banking/src/features/transfer/views/pages/transfer_page.dart';
+import 'package:f_banking/src/routes/apps_routes.dart';
 import 'package:f_banking/src/shared/components/custom_dot_menu.dart';
 import 'package:f_banking/src/features/home/views/components/dashboard.dart';
 import 'package:f_banking/src/shared/components/item.dart';
@@ -243,7 +243,7 @@ class HomePage extends StatelessWidget {
                                                       MaterialPageRoute(
                                                         builder:
                                                             (context) =>
-                                                                TransferPage(),
+                                                                featureRoute[index],
                                                       ),
                                                     );
                                                   },
@@ -258,6 +258,9 @@ class HomePage extends StatelessWidget {
                                                           .itemSize,
                                                   child: Image.asset(
                                                     itemModel[index].image,
+                                                    color: white,
+                                                    colorBlendMode:
+                                                        BlendMode.srcIn,
                                                   ),
                                                 ),
 
@@ -304,6 +307,9 @@ class HomePage extends StatelessWidget {
                                                               .itemSize,
                                                   child: Image.asset(
                                                     itemModel[index + 4].image,
+                                                    color: white,
+                                                    colorBlendMode:
+                                                        BlendMode.srcIn,
                                                   ),
                                                 ),
                                                 const SizedBox(height: 5),
@@ -402,8 +408,8 @@ class HomePage extends StatelessWidget {
                             margin: const EdgeInsets.only(bottom: 15),
                             gradientColor: LinearGradient(
                               colors: [
+                                const Color(0xFF2A3D55).withAlpha(50),
                                 darkBlue2,
-                                const Color(0xFF2A3D55).withAlpha(0),
                               ],
                               begin: Alignment.bottomLeft,
                               end: Alignment.topRight,

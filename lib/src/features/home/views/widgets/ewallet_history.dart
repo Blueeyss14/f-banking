@@ -10,6 +10,11 @@ Widget buildPaymentActivity() {
       children: List.generate(
         10,
         (index) => Item(
+          gradientColor: LinearGradient(
+            colors: [const Color(0xFF2A3D55).withAlpha(50), darkBlue2],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+          ),
           margin: const EdgeInsets.only(right: 10),
           padding: const EdgeInsets.all(10),
           child: Column(
