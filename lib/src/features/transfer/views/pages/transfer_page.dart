@@ -25,6 +25,7 @@ class TransferPage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(children: [Item()]),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: AutoSizeText(
@@ -43,24 +44,27 @@ class TransferPage extends StatelessWidget {
                     Item(height: 50, width: 50, child: Text("data")),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 40,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: TextField(
-                          cursorColor: darkBlue,
-                          decoration: InputDecoration(
-                            hintText: "Account Number",
-                            border: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                            ),
+                      child: TextField(
+                        keyboardType: TextInputType.numberWithOptions(),
+                        style: TextStyle(color: white),
+                        cursorColor: darkBlue,
+                        decoration: InputDecoration(
+                          labelText: "Account Number",
+                          labelStyle: TextStyle(color: white),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: white),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: white),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          isDense: false,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 10,
                           ),
                         ),
                       ),
