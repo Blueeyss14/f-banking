@@ -13,7 +13,12 @@ Widget buildMenuIconAnimation(BuildContext context) {
   }
 
   return GestureDetector(
-    onTap: scrollPage.isScrolled ? unTap : dashboardProvider.checkClick,
+    onTap:
+        dashboardProvider.isClicked
+            ? dashboardProvider.checkClick
+            : scrollPage.isScrolled
+            ? unTap
+            : dashboardProvider.checkClick,
     child: AnimatedContainer(
       margin: const EdgeInsets.all(15),
       alignment: Alignment.center,

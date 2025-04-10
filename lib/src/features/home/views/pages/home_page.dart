@@ -399,29 +399,34 @@ class HomePage extends StatelessWidget {
           ),
           Consumer<ScrollPageProvider>(
             builder: (context, scrollPage, _) {
-              return AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
-                opacity: scrollPage.isScrolled ? 0 : 1,
-                child: SafeArea(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          buildMenuIconAnimation(context),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: Image.asset(
-                              "assets/img/QR.png",
-                              width: 30,
-                              height: 30,
-                            ),
+              return SafeArea(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AnimatedOpacity(
+                          duration: Duration(milliseconds: 200),
+                          opacity:
+                              dashboardProvider.isClicked
+                                  ? 1
+                                  : scrollPage.isScrolled
+                                  ? 0
+                                  : 1,
+                          child: buildMenuIconAnimation(context),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Image.asset(
+                            "assets/img/QR.png",
+                            width: 30,
+                            height: 30,
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               );
             },
