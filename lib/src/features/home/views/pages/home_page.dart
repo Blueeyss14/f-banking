@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:f_banking/src/features/home/models/item_model.dart';
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/features/home/views/widgets/ewallet_history.dart';
+import 'package:f_banking/src/features/home/views/widgets/income_outcome.dart';
+import 'package:f_banking/src/features/transfer/views/transfer_page.dart';
 import 'package:f_banking/src/shared/components/custom_dot_menu.dart';
 import 'package:f_banking/src/features/home/views/components/dashboard.dart';
 import 'package:f_banking/src/shared/components/item.dart';
@@ -29,7 +31,7 @@ class HomePage extends StatelessWidget {
               buildDashboard(context),
               Flexible(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   alignment: Alignment.topCenter,
                   child: SingleChildScrollView(
                     child: Column(
@@ -192,6 +194,16 @@ class HomePage extends StatelessWidget {
                                           (index) => Column(
                                             children: [
                                               Item(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder:
+                                                          (context) =>
+                                                              TransferPage(),
+                                                    ),
+                                                  );
+                                                },
                                                 padding: const EdgeInsets.all(
                                                   12,
                                                 ),
@@ -332,6 +344,8 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         buildPaymentActivity(),
+                        const SizedBox(height: 15),
+                        buildIncomeOutcome(),
                       ],
                     ),
                   ),
