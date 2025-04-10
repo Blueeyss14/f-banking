@@ -10,6 +10,7 @@ import 'package:f_banking/src/shared/components/custom_dot_menu.dart';
 import 'package:f_banking/src/features/home/views/components/dashboard.dart';
 import 'package:f_banking/src/shared/components/item.dart';
 import 'package:f_banking/src/features/home/views/components/menu_icon_animation.dart';
+import 'package:f_banking/src/shared/components/line_chart.dart';
 import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
@@ -135,7 +136,7 @@ class HomePage extends StatelessWidget {
                                               "128.4\$",
                                               style: TextStyle(
                                                 fontSize: 28,
-                                                color: Colors.white,
+                                                color: white,
                                               ),
                                             )
                                           else
@@ -160,12 +161,12 @@ class HomePage extends StatelessWidget {
                                                 dashboardProvider.isVisible
                                                     ? Icon(
                                                       Icons.visibility,
-                                                      color: Colors.white,
+                                                      color: white,
                                                       size: 20,
                                                     )
                                                     : Icon(
                                                       Icons.visibility_off,
-                                                      color: Colors.white,
+                                                      color: white,
                                                       size: 20,
                                                     ),
                                           ),
@@ -175,7 +176,7 @@ class HomePage extends StatelessWidget {
                                         maxLines: 1,
                                         "Balance",
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: white,
                                           fontSize: 12,
                                           height: 1,
                                         ),
@@ -264,7 +265,7 @@ class HomePage extends StatelessWidget {
                                                 AutoSizeText(
                                                   itemModel[index].title,
                                                   style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: white,
                                                   ),
                                                 ),
                                               ],
@@ -321,7 +322,7 @@ class HomePage extends StatelessWidget {
                                                     maxLines: 1,
                                                     itemModel[index + 4].title,
                                                     style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: white,
                                                     ),
                                                   ),
                                                 ),
@@ -347,13 +348,13 @@ class HomePage extends StatelessWidget {
                                                   ? Text(
                                                     "See Less",
                                                     style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: white,
                                                     ),
                                                   )
                                                   : Text(
                                                     "See More",
                                                     style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: white,
                                                     ),
                                                   ),
                                               const SizedBox(width: 5),
@@ -368,7 +369,7 @@ class HomePage extends StatelessWidget {
                                                 ),
                                                 child: Icon(
                                                   Icons.expand_less,
-                                                  color: Colors.white,
+                                                  color: white,
                                                 ),
                                               ),
                                             ],
@@ -386,7 +387,7 @@ class HomePage extends StatelessWidget {
                             child: AutoSizeText(
                               "Payment Activity",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
@@ -396,6 +397,20 @@ class HomePage extends StatelessWidget {
                           buildPaymentActivity(),
                           const SizedBox(height: 15),
                           buildIncomeExpense(context),
+                          const SizedBox(height: 15),
+                          Item(
+                            margin: const EdgeInsets.only(bottom: 15),
+                            gradientColor: LinearGradient(
+                              colors: [
+                                darkBlue2,
+                                const Color(0xFF2A3D55).withAlpha(0),
+                              ],
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: LineChartSample2(),
+                          ),
                         ],
                       ),
                     ),

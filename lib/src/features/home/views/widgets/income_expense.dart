@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:f_banking/src/features/home/models/status_model.dart';
 import 'package:f_banking/src/shared/components/item.dart';
+import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -19,12 +20,12 @@ Widget buildIncomeExpense(BuildContext context) {
     items.add(
       Flexible(
         child: Item(
-          // gradientColor: LinearGradient(
-          //   colors: [darkBlue2, const Color(0xFF458B46).withAlpha(100)],
-          //   begin: Alignment.bottomLeft,
-          //   end: Alignment.topRight,
-          // ),
-          // color: darkBlue2,
+          gradientColor: LinearGradient(
+            colors: [darkBlue2, statusData[i].color.withAlpha(0)],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+          ),
+          color: darkBlue2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -33,7 +34,17 @@ Widget buildIncomeExpense(BuildContext context) {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.arrow_upward_rounded),
+                    child: Icon(
+                      statusData[i].icon,
+                      color: statusData[i].color,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black.withAlpha(50),
+                          offset: Offset(1, 1),
+                          blurRadius: 10,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -48,13 +59,17 @@ Widget buildIncomeExpense(BuildContext context) {
                   animation: true,
                   animationDuration: 1000,
                   circularStrokeCap: CircularStrokeCap.round,
-                  backgroundColor: Colors.white,
+                  backgroundColor: white,
                   linearGradient: LinearGradient(
-                    colors: [statusData[i].color, Colors.white],
+                    colors: [statusData[i].color, white],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  center: AutoSizeText(percentText, maxLines: 1),
+                  center: AutoSizeText(
+                    percentText,
+                    maxLines: 1,
+                    style: TextStyle(color: white),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -67,14 +82,14 @@ Widget buildIncomeExpense(BuildContext context) {
                     AutoSizeText(
                       "${statusData[i].type}:",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: white,
                         fontWeight: FontWeight.bold,
                       ),
                       maxLines: 1,
                     ),
                     AutoSizeText(
                       "${statusData[i].amount}\$",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: white, fontSize: 20),
                       maxLines: 1,
                     ),
                   ],
