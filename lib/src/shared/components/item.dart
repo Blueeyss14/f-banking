@@ -9,6 +9,7 @@ class Item extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final void Function()? onTap;
   final Color? color;
+  final Gradient? gradientColor;
   const Item({
     super.key,
     this.height,
@@ -18,6 +19,7 @@ class Item extends StatelessWidget {
     this.margin,
     this.onTap,
     this.color,
+    this.gradientColor,
   });
 
   @override
@@ -32,6 +34,7 @@ class Item extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
+          gradient: gradientColor,
           color: color ?? darkBlue3,
           borderRadius: BorderRadius.circular(5),
           border: Border(
@@ -45,6 +48,3 @@ class Item extends StatelessWidget {
     );
   }
 }
-
-    //  width: dashboardProvider.itemSize,
-    //   height: dashboardProvider.itemSize,

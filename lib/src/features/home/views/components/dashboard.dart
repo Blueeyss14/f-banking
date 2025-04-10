@@ -52,13 +52,6 @@ Widget buildDashboard(BuildContext context) {
                 ),
               ),
             ),
-
-            // AutoSizeText(
-            //   "data",
-            //   style: TextStyle(fontSize: isClicked ? 24 : 0),
-            //   maxFontSize: 24,
-            //   maxLines: 1,
-            // ),
           ),
         ),
       ],

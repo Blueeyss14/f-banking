@@ -4,8 +4,8 @@ import 'package:f_banking/src/features/home/models/item_model.dart';
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/features/home/viewmodels/scroll_page_provider.dart';
 import 'package:f_banking/src/features/home/views/widgets/ewallet_history.dart';
-import 'package:f_banking/src/features/home/views/widgets/income_outcome.dart';
-import 'package:f_banking/src/features/transfer/views/transfer_page.dart';
+import 'package:f_banking/src/features/home/views/widgets/income_expense.dart';
+import 'package:f_banking/src/features/transfer/views/pages/transfer_page.dart';
 import 'package:f_banking/src/shared/components/custom_dot_menu.dart';
 import 'package:f_banking/src/features/home/views/components/dashboard.dart';
 import 'package:f_banking/src/shared/components/item.dart';
@@ -395,7 +395,7 @@ class HomePage extends StatelessWidget {
                           ),
                           buildPaymentActivity(),
                           const SizedBox(height: 15),
-                          buildIncomeOutcome(),
+                          buildIncomeExpense(context),
                         ],
                       ),
                     ),
