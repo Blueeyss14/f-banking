@@ -1,12 +1,19 @@
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
+import 'package:f_banking/src/features/home/viewmodels/scroll_page_provider.dart';
 import 'package:f_banking/src/shared/components/custom_dot_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Widget buildMenuIconAnimation(BuildContext context) {
   final dashboardProvider = Provider.of<DashboardProvider>(context);
+  final scrollPage = Provider.of<ScrollPageProvider>(context);
+
+  void unTap() {
+    return;
+  }
+
   return GestureDetector(
-    onTap: dashboardProvider.checkClick,
+    onTap: scrollPage.isScrolled ? unTap : dashboardProvider.checkClick,
     child: AnimatedContainer(
       margin: const EdgeInsets.all(15),
       alignment: Alignment.center,
