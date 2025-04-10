@@ -39,14 +39,21 @@ class HomePage extends StatelessWidget {
 
                   child: NotificationListener<ScrollNotification>(
                     onNotification: (scrollNotification) {
-                      final provider = Provider.of<ScrollPageProvider>(
-                        context,
-                        listen: false,
-                      );
-                      if (scrollNotification.metrics.pixels > 10) {
-                        provider.setScrolled(true);
-                      } else {
-                        provider.setScrolled(false);
+                      /// vertical axis only
+                      if (scrollNotification is ScrollUpdateNotification &&
+                          scrollNotification.scrollDelta != null &&
+                          scrollNotification.scrollDelta!.abs() > 0 &&
+                          scrollNotification.metrics.axis == Axis.vertical) {
+                        final provider = Provider.of<ScrollPageProvider>(
+                          context,
+                          listen: false,
+                        );
+
+                        if (scrollNotification.metrics.pixels > 10) {
+                          provider.setScrolled(true);
+                        } else {
+                          provider.setScrolled(false);
+                        }
                       }
                       return true;
                     },
