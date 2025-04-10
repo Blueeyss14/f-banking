@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:f_banking/src/features/home/models/credit_card.dart';
 import 'package:f_banking/src/features/home/models/item_model.dart';
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/features/home/views/widgets/ewallet_history.dart';
@@ -20,8 +21,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final dashboardProvider = Provider.of<DashboardProvider>(context);
     FlipCardController flipCardController = FlipCardController();
-
     List<ItemModel> itemModel = ItemModel.itemData();
+    List<CreditCard> creditCard = CreditCard.imageData();
+
     return Scaffold(
       backgroundColor: darkBlue,
       body: Stack(
@@ -61,17 +63,8 @@ class HomePage extends StatelessWidget {
                               FlipCard(
                                 animationDuration: Duration(milliseconds: 400),
                                 onTapFlipping: true,
-                                frontWidget: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 200,
-                                  color: Colors.green,
-                                  child: Text("data"),
-                                ),
-                                backWidget: Container(
-                                  color: Colors.amber,
-                                  width: double.infinity,
-                                  height: 200,
-                                ),
+                                frontWidget: Image.asset(creditCard[0].image),
+                                backWidget: Image.asset(creditCard[1].image),
                                 controller: flipCardController,
                                 rotateSide: RotateSide.bottom,
                               ),
