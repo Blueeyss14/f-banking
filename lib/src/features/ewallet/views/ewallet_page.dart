@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:f_banking/src/features/ewallet/models/ewallet_data_model.dart';
 import 'package:f_banking/src/features/ewallet/models/ewallet_model.dart';
-import 'package:f_banking/src/features/transfer/viewmodels/transfer_provider.dart';
+import 'package:f_banking/src/features/ewallet/viewmodels/ewallet_data_provider.dart';
 import 'package:f_banking/src/shared/components/activity.dart';
 import 'package:f_banking/src/shared/components/item.dart';
 import 'package:f_banking/src/shared/components/item_textfield.dart';
@@ -13,8 +14,9 @@ class EwalletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final transfers = Provider.of<TransferProvider>(context).items;
+    final ewallet = Provider.of<EwalletDataProvider>(context).items;
     List<EwalletModel> ewalletModel = EwalletModel.imageData();
+    List<EwalletDataModel> ewalletData = EwalletDataModel.itemData();
     return Scaffold(
       resizeToAvoidBottomInset: false,
 
@@ -31,11 +33,11 @@ class EwalletPage extends StatelessWidget {
           child: Column(
             children: [
               Activity(
-                itemCount: transfers.length,
-                titles: transfers.map((e) => e.number).toList(),
-                subTitles: transfers.map((e) => e.name).toList(),
+                itemCount: ewalletData.length,
+                titles: ewallet.map((e) => e.name).toList(),
+                subTitles: ewalletData.map((e) => e.ewallet).toList(),
                 images:
-                    transfers
+                    ewalletData
                         .map((e) => Image.asset(e.image, fit: BoxFit.cover))
                         .toList(),
               ),
@@ -60,21 +62,17 @@ class EwalletPage extends StatelessWidget {
                   (index) => Item(
                     color: darkBlue2,
                     margin: const EdgeInsets.only(bottom: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
 
-                    // gradientColor: LinearGradient(
-                    //   colors: [
-                    //     const Color(0xFF2A3D55).withAlpha(50),
-                    //     darkBlue2,
-                    //   ],
-                    //   begin: Alignment.bottomLeft,
-                    //   end: Alignment.topRight,
-                    // ),
                     child: Row(
                       children: [
-                        Image.asset(
-                          ewalletModel[index].image,
-                          width: 60,
-                          height: 60,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            ewalletModel[index].image,
+                            width: 40,
+                            height: 40,
+                          ),
                         ),
                         const SizedBox(width: 5),
                         AutoSizeText(

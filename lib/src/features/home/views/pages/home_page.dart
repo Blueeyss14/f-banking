@@ -1,11 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:f_banking/src/features/ewallet/models/ewallet_data_model.dart';
+import 'package:f_banking/src/features/ewallet/viewmodels/ewallet_data_provider.dart';
 import 'package:f_banking/src/features/home/models/credit_card.dart';
 import 'package:f_banking/src/features/home/models/item_model.dart';
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/features/home/viewmodels/scroll_page_provider.dart';
-import 'package:f_banking/src/features/home/views/widgets/ewallet_history.dart';
 import 'package:f_banking/src/features/home/views/widgets/income_expense.dart';
 import 'package:f_banking/src/routes/apps_routes.dart';
+import 'package:f_banking/src/shared/components/activity.dart';
 import 'package:f_banking/src/shared/components/custom_dot_menu.dart';
 import 'package:f_banking/src/features/home/views/components/dashboard.dart';
 import 'package:f_banking/src/shared/components/item.dart';
@@ -25,6 +27,9 @@ class HomePage extends StatelessWidget {
     FlipCardController flipCardController = FlipCardController();
     List<ItemModel> itemModel = ItemModel.itemData();
     List<CreditCard> creditCard = CreditCard.imageData();
+
+    final ewallet = Provider.of<EwalletDataProvider>(context).items;
+    List<EwalletDataModel> ewalletData = EwalletDataModel.itemData();
 
     return Scaffold(
       backgroundColor: darkBlue,
@@ -400,7 +405,21 @@ class HomePage extends StatelessWidget {
                               maxLines: 1,
                             ),
                           ),
-                          buildPaymentActivity(),
+                          Activity(
+                            itemCount: ewalletData.length,
+                            titles: ewallet.map((e) => e.name).toList(),
+                            subTitles:
+                                ewalletData.map((e) => e.ewallet).toList(),
+                            images:
+                                ewalletData
+                                    .map(
+                                      (e) => Image.asset(
+                                        e.image,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                    .toList(),
+                          ),
                           const SizedBox(height: 15),
                           buildIncomeExpense(context),
                           const SizedBox(height: 15),

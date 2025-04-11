@@ -1,3 +1,4 @@
+import 'package:f_banking/src/features/ewallet/viewmodels/ewallet_data_provider.dart';
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/features/home/viewmodels/scroll_page_provider.dart';
 import 'package:f_banking/src/features/transfer/viewmodels/transfer_provider.dart';
@@ -11,6 +12,7 @@ class SetupProvider {
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
         ChangeNotifierProvider(create: (_) => ScrollPageProvider()),
         ChangeNotifierProvider(create: (_) => TransferProvider()),
+        ChangeNotifierProvider(create: (_) => EwalletDataProvider()),
       ],
       child: child,
     );

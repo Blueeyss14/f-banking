@@ -57,7 +57,7 @@ class Activity extends StatelessWidget {
                       style: TextStyle(
                         color: white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 18,
                       ),
                       maxLines: 1,
                     ),
