@@ -31,7 +31,17 @@ class EwalletPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                "Payment Activity",
+                style: TextStyle(
+                  color: white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
               Activity(
                 itemCount: ewalletData.length,
                 titles: ewallet.map((e) => e.name).toList(),
@@ -44,23 +54,40 @@ class EwalletPage extends StatelessWidget {
 
               const SizedBox(height: 10),
               ItemTextfield(
+                gradientColor: LinearGradient(
+                  colors: [const Color(0xFF2A3D55).withAlpha(50), darkBlue2],
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                ),
                 title: "Search E-Wallet",
                 labelText: "Search",
                 borderRadius: BorderRadius.circular(0),
                 keyboardType: TextInputType.text,
-                image: Item(
-                  padding: const EdgeInsets.all(10),
+                image: Container(
+                  padding: const EdgeInsets.all(8),
                   child: Image.asset(
                     "assets/img/ewallet.png",
                     fit: BoxFit.cover,
+                    color: white,
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
                   ewalletModel.length,
                   (index) => Item(
+                    gradientColor: LinearGradient(
+                      colors: [
+                        const Color(0xFF2A3D55).withAlpha(50),
+                        darkBlue2,
+                      ],
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                    ),
+                    width: MediaQuery.of(context).size.width - 150,
+
                     color: darkBlue2,
                     margin: const EdgeInsets.only(bottom: 5),
                     padding: const EdgeInsets.symmetric(horizontal: 5),

@@ -1,3 +1,4 @@
+import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
 
 class CustomDotMenu extends StatelessWidget {
@@ -10,7 +11,7 @@ class CustomDotMenu extends StatelessWidget {
     return Container(
       width: size ?? 8,
       height: size ?? 8,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: white),
       child: child,
     );
   }

@@ -6,4 +6,4 @@ const darkBlue3 = Color(0xFF3C4053);
 
 const blue = Color(0xFF446794);
 const purple = Color(0xFF723585);
-const white = Colors.white;
+const white = Color(0xFFE6E6E6);

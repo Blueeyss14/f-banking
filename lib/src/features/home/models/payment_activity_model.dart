@@ -46,7 +46,7 @@ class PaymentActivityModel {
         "ewallet": "PayPal",
         "number": "@208124",
         "amount": "40.0\$",
-        "name": "Felica Rei",
+        "name": "Felicia Rei",
       },
       {
         "image": "assets/img/shopeepay.png",
@@ -54,6 +54,13 @@ class PaymentActivityModel {
         "number": "082323xxx9",
         "amount": "2.4\$",
         "name": "Takashi",
+      },
+      {
+        "image": "assets/img/shopeepay.png",
+        "ewallet": "ShopeePay",
+        "number": "02323678",
+        "amount": "1.0\$",
+        "name": "Mas Romo",
       },
       {
         "image": "assets/img/shopeepay.png",

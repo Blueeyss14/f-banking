@@ -1,6 +1,7 @@
 import 'package:f_banking/src/features/home/models/payment_activity_model.dart';
 import 'package:f_banking/src/features/home/views/widgets/income_expense.dart';
 import 'package:f_banking/src/shared/components/item.dart';
+import 'package:f_banking/src/shared/components/item_textfield.dart';
 import 'package:f_banking/src/shared/components/line_chart.dart';
 import 'package:f_banking/src/shared/components/transaction_activity.dart';
 import 'package:f_banking/src/shared/style.dart';
@@ -33,6 +34,19 @@ class TransactionPage extends StatelessWidget {
             ),
             buildIncomeExpense(context),
             const SizedBox(height: 15),
+            ItemTextfield(
+              keyboardType: TextInputType.text,
+              gradientColor: LinearGradient(
+                colors: [const Color(0xFF2A3D55).withAlpha(50), darkBlue2],
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+              ),
+              title: "Payment History",
+              labelText: "Search",
+              image: Icon(Icons.history, color: white, size: 35),
+            ),
+
+            const SizedBox(height: 15),
             Text(
               "Payment Activity",
               style: TextStyle(
@@ -41,7 +55,7 @@ class TransactionPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
             TransactionActivity(
               margin: const EdgeInsets.only(bottom: 5),
               width: MediaQuery.of(context).size.width - 100,

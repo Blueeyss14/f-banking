@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     final sidebar = Provider.of<SidebarProvider>(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: darkBlue,
       body: Stack(
         children: [
@@ -97,6 +98,7 @@ class _HomePageState extends State<HomePage> {
                               "assets/img/QR.png",
                               width: 30,
                               height: 30,
+                              color: white,
                             ),
                           ),
                         ),

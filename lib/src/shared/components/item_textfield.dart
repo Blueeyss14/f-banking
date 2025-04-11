@@ -10,6 +10,7 @@ class ItemTextfield extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final BorderRadiusGeometry? borderRadius;
   final TextInputType? keyboardType;
+  final Gradient? gradientColor;
   const ItemTextfield({
     super.key,
     this.title,
@@ -18,11 +19,13 @@ class ItemTextfield extends StatelessWidget {
     this.labelText,
     this.borderRadius,
     this.keyboardType,
+    this.gradientColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Item(
+      gradientColor: gradientColor,
       color: darkBlue2,
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       child: Row(
