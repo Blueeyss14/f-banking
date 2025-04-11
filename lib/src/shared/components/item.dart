@@ -11,6 +11,7 @@ class Item extends StatelessWidget {
   final Color? color;
   final Gradient? gradientColor;
   final BorderRadiusGeometry? borderRadius;
+  final AlignmentGeometry? alignment;
   const Item({
     super.key,
     this.height,
@@ -22,6 +23,7 @@ class Item extends StatelessWidget {
     this.color,
     this.gradientColor,
     this.borderRadius,
+    this.alignment,
   });
 
   @override
@@ -30,7 +32,7 @@ class Item extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         margin: margin,
-        alignment: Alignment.center,
+        alignment: alignment ?? Alignment.center,
         padding: padding,
         clipBehavior: Clip.antiAlias,
         width: width,

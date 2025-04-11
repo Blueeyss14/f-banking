@@ -61,7 +61,7 @@ Widget buildIncomeExpense(BuildContext context) {
                   circularStrokeCap: CircularStrokeCap.round,
                   backgroundColor: white,
                   linearGradient: LinearGradient(
-                    colors: [statusData[i].color, white],
+                    colors: [white, statusData[i].color],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),

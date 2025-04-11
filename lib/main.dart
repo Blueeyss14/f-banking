@@ -1,6 +1,7 @@
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
 import 'package:f_banking/src/features/home/viewmodels/scroll_page_provider.dart';
 import 'package:f_banking/src/features/home/views/pages/home_page.dart';
+import 'package:f_banking/src/features/transfer/viewmodels/transfer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
         ChangeNotifierProvider(create: (_) => ScrollPageProvider()),
+        ChangeNotifierProvider(create: (_) => TransferProvider()),
       ],
       child: const MyApp(),
     ),
