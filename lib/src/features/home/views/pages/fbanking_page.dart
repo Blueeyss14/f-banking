@@ -26,6 +26,7 @@ class FbankingPage extends StatelessWidget {
     FlipCardController flipCardController = FlipCardController();
     List<ItemModel> itemModel = ItemModel.itemData();
     List<CreditCard> creditCard = CreditCard.imageData();
+    double dollar = 128.4;
 
     final ewallet = Provider.of<EwalletDataProvider>(context).items;
     List<EwalletDataModel> ewalletData = EwalletDataModel.itemData();
@@ -87,10 +88,17 @@ class FbankingPage extends StatelessWidget {
                       Row(
                         children: [
                           if (dashboardProvider.isVisible)
-                            AutoSizeText(
-                              maxLines: 1,
-                              "128.4\$",
-                              style: TextStyle(fontSize: 28, color: white),
+                            TweenAnimationBuilder(
+                              tween: Tween<double>(begin: 0, end: dollar),
+                              duration: Duration(seconds: 1),
+                              builder:
+                                  (context, value, child) => AutoSizeText(
+                                    "${value.toStringAsFixed(1)}\$",
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: white,
+                                    ),
+                                  ),
                             )
                           else
                             Row(

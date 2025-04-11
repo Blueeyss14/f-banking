@@ -11,7 +11,6 @@ Widget buildDashboard(BuildContext context) {
   final sidebarProvider = Provider.of<SidebarProvider>(context);
   List<SidebarModel> sidebar = SidebarModel.sidebarData();
   double borderSize = 0.5;
-  // List<Color> colors = [Colors.red, Colors.blue, Colors.green];
   return AnimatedContainer(
     curve: Curves.easeInOut,
     width:
@@ -51,8 +50,12 @@ Widget buildDashboard(BuildContext context) {
                       padding: const EdgeInsets.all(3),
                       alignment: Alignment.center,
                       width: double.infinity,
-                      // color: colors[index],
+                      color:
+                          sidebarProvider.currentIndex == index
+                              ? darkBlue3
+                              : Colors.transparent,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(sidebar[index].icon, color: white),
                           AutoSizeText(
