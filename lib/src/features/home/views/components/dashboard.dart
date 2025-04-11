@@ -59,7 +59,7 @@ Widget buildDashboard(BuildContext context) {
                             sidebar[index].title,
                             maxLines: 1,
                             minFontSize: 0,
-                            style: TextStyle(color: white),
+                            style: TextStyle(color: white, fontSize: 11),
                           ),
                         ],
                       ),
