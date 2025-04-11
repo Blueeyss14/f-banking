@@ -8,6 +8,9 @@ class TransactionActivity extends StatelessWidget {
   final List<String?>? subTitles;
   final List<Widget?>? images;
   final int? itemCount;
+  final double? width;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
 
   const TransactionActivity({
     super.key,
@@ -15,23 +18,29 @@ class TransactionActivity extends StatelessWidget {
     this.subTitles,
     this.images,
     this.itemCount,
+    this.width,
+    this.padding,
+    this.margin,
   });
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+      scrollDirection: Axis.vertical,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: List.generate(
           itemCount ?? 0,
           (index) => Item(
+            width: width,
             gradientColor: LinearGradient(
               colors: [const Color(0xFF2A3D55).withAlpha(50), darkBlue2],
               begin: Alignment.bottomLeft,
               end: Alignment.topRight,
             ),
-            margin: const EdgeInsets.only(right: 10),
-            padding: const EdgeInsets.all(10),
+            margin: margin ?? const EdgeInsets.only(right: 10),
+            padding: padding ?? const EdgeInsets.all(10),
             child: Row(
               children: [
                 Container(
@@ -47,27 +56,33 @@ class TransactionActivity extends StatelessWidget {
                           ? images![index]
                           : const SizedBox(),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AutoSizeText(
-                      titles != null && index < titles!.length
-                          ? titles![index] ?? "title"
-                          : "title",
-                      style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AutoSizeText(
+                        titles != null && index < titles!.length
+                            ? titles![index] ?? "title"
+                            : "title",
+                        style: TextStyle(
+                          color: white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        maxLines: 1,
                       ),
-                      maxLines: 1,
-                    ),
-                    AutoSizeText(
-                      subTitles != null && index < subTitles!.length
-                          ? subTitles![index] ?? "Sub Title"
-                          : "Sub Title",
-                      style: TextStyle(color: white),
-                    ),
-                  ],
+                      AutoSizeText(
+                        subTitles != null && index < subTitles!.length
+                            ? subTitles![index] ?? "Sub Title"
+                            : "Sub Title",
+                        style: TextStyle(
+                          color: white,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
