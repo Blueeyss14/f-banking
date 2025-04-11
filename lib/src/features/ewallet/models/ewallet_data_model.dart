@@ -11,6 +11,7 @@ class EwalletDataModel {
         "ewallet": "ShopeePay",
         "name": "Ayam Mas Romo",
       },
+      {"image": "assets/img/dana.png", "ewallet": "Dana", "name": "Steam"},
       {
         "image": "assets/img/gopay.png",
         "ewallet": "Gopay",

@@ -47,6 +47,7 @@ class EwalletPage extends StatelessWidget {
                 title: "Search E-Wallet",
                 labelText: "Search",
                 borderRadius: BorderRadius.circular(0),
+                keyboardType: TextInputType.text,
                 image: Item(
                   padding: const EdgeInsets.all(10),
                   child: Image.asset(

@@ -1,13 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:f_banking/src/features/home/models/sidebar_model.dart';
 import 'package:f_banking/src/features/home/viewmodels/dashboard_provider.dart';
+import 'package:f_banking/src/features/home/viewmodels/sidebar_provider.dart';
 import 'package:f_banking/src/shared/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Widget buildDashboard(BuildContext context) {
   final dashboardProvider = Provider.of<DashboardProvider>(context);
+  final sidebarProvider = Provider.of<SidebarProvider>(context);
+  List<SidebarModel> sidebar = SidebarModel.sidebarData();
   double borderSize = 0.5;
-  List<Color> colors = [Colors.red, Colors.blue, Colors.green];
+  // List<Color> colors = [Colors.red, Colors.blue, Colors.green];
   return AnimatedContainer(
     curve: Curves.easeInOut,
     width:
@@ -29,25 +33,37 @@ Widget buildDashboard(BuildContext context) {
           child: Container(
             clipBehavior: Clip.antiAlias,
             alignment: Alignment.center,
-            height: MediaQuery.of(context).size.width / 2,
+            height: MediaQuery.of(context).size.width / 2 + 50,
             decoration: BoxDecoration(
               color:
-                  dashboardProvider.isClicked
-                      ? Colors.amber
-                      : Colors.transparent,
+                  dashboardProvider.isClicked ? darkBlue2 : Colors.transparent,
 
               borderRadius: BorderRadius.horizontal(right: Radius.circular(10)),
             ),
 
             child: Column(
               children: List.generate(
-                3,
+                sidebar.length,
                 (index) => Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    color: colors[index],
-                    child: AutoSizeText("data", maxLines: 1),
+                  child: GestureDetector(
+                    onTap: () => sidebarProvider.pageIndex(index),
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      // color: colors[index],
+                      child: Column(
+                        children: [
+                          Icon(sidebar[index].icon, color: white),
+                          AutoSizeText(
+                            sidebar[index].title,
+                            maxLines: 1,
+                            minFontSize: 0,
+                            style: TextStyle(color: white),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),

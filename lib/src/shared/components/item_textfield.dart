@@ -9,6 +9,7 @@ class ItemTextfield extends StatelessWidget {
   final Widget? image;
   final EdgeInsetsGeometry? padding;
   final BorderRadiusGeometry? borderRadius;
+  final TextInputType? keyboardType;
   const ItemTextfield({
     super.key,
     this.title,
@@ -16,6 +17,7 @@ class ItemTextfield extends StatelessWidget {
     this.padding,
     this.labelText,
     this.borderRadius,
+    this.keyboardType,
   });
 
   @override
@@ -52,7 +54,8 @@ class ItemTextfield extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 TextField(
-                  keyboardType: TextInputType.numberWithOptions(),
+                  keyboardType:
+                      keyboardType ?? TextInputType.numberWithOptions(),
                   style: TextStyle(color: white),
                   cursorColor: white,
                   decoration: InputDecoration(
