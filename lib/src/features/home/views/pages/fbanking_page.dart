@@ -225,6 +225,15 @@ class FbankingPage extends StatelessWidget {
                             (index) => Column(
                               children: [
                                 Item(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => featureRoute2[index],
+                                      ),
+                                    );
+                                  },
                                   padding: const EdgeInsets.all(10),
                                   width:
                                       !dashboardProvider.showMore
