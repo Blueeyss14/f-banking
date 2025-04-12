@@ -11,7 +11,7 @@ class ItemModel {
       {"icon": "assets/img/atm.png", "title": "F to Bank"},
       {"icon": "assets/img/top-up.png", "title": "Top-up"},
       {"icon": "assets/img/education.png", "title": "Education"},
-      {"icon": "assets/img/donation.png", "title": "Donation"},
+      {"icon": "assets/img/donation.png", "title": "Charity"},
       {"icon": "assets/img/games.png", "title": "Games"},
       {"icon": "assets/img/QR.png", "title": "QR"},
     ];

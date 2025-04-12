@@ -21,9 +21,16 @@ class TransactionPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 120),
-
+            Text(
+              "History",
+              style: TextStyle(
+                color: white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Item(
-              margin: const EdgeInsets.only(bottom: 15),
+              margin: const EdgeInsets.symmetric(vertical: 15),
               gradientColor: LinearGradient(
                 colors: [const Color(0xFF2A3D55).withAlpha(50), darkBlue2],
                 begin: Alignment.bottomLeft,
