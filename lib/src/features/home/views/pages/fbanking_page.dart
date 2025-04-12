@@ -29,7 +29,7 @@ class FbankingPage extends StatelessWidget {
     double dollar = 128.4;
 
     final ewallet = Provider.of<EwalletDataProvider>(context).items;
-    List<EwalletDataModel> ewalletData = EwalletDataModel.itemData();
+    List<EwalletDataModel> ewalletData = EwalletDataModel.ewalletData();
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

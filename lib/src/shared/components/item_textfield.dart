@@ -11,6 +11,8 @@ class ItemTextfield extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final TextInputType? keyboardType;
   final Gradient? gradientColor;
+  final Function(String)? onChanged;
+  final TextEditingController? controller;
   const ItemTextfield({
     super.key,
     this.title,
@@ -20,6 +22,8 @@ class ItemTextfield extends StatelessWidget {
     this.borderRadius,
     this.keyboardType,
     this.gradientColor,
+    this.onChanged,
+    this.controller,
   });
 
   @override
@@ -57,6 +61,8 @@ class ItemTextfield extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 TextField(
+                  controller: controller,
+                  onChanged: onChanged,
                   keyboardType:
                       keyboardType ?? TextInputType.numberWithOptions(),
                   style: TextStyle(color: white),

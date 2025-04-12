@@ -28,7 +28,17 @@ class TransferPage extends StatelessWidget {
           children: [
             SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    "Payment Activity",
+                    style: TextStyle(
+                      color: white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   Activity(
                     itemCount: transfers.length,
                     titles: transfers.map((e) => e.number).toList(),

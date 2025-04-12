@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:f_banking/src/features/ewallet/models/ewallet_data_model.dart';
-import 'package:f_banking/src/features/ewallet/models/ewallet_model.dart';
 import 'package:f_banking/src/features/ewallet/viewmodels/ewallet_data_provider.dart';
+import 'package:f_banking/src/features/ewallet/viewmodels/search_ewallet_provider.dart';
 import 'package:f_banking/src/shared/components/activity.dart';
 import 'package:f_banking/src/shared/components/item.dart';
 import 'package:f_banking/src/shared/components/item_textfield.dart';
@@ -15,8 +15,10 @@ class EwalletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ewallet = Provider.of<EwalletDataProvider>(context).items;
-    List<EwalletModel> ewalletModel = EwalletModel.imageData();
-    List<EwalletDataModel> ewalletData = EwalletDataModel.itemData();
+    List<EwalletDataModel> ewalletData = EwalletDataModel.ewalletData();
+
+    final ewalletProvider = Provider.of<SearchEwalletProvider>(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
 
@@ -54,6 +56,8 @@ class EwalletPage extends StatelessWidget {
 
               const SizedBox(height: 10),
               ItemTextfield(
+                controller: ewalletProvider.searchController,
+                onChanged: ewalletProvider.searchItem,
                 gradientColor: LinearGradient(
                   colors: [const Color(0xFF2A3D55).withAlpha(50), darkBlue2],
                   begin: Alignment.bottomLeft,
@@ -76,7 +80,7 @@ class EwalletPage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
-                  ewalletModel.length,
+                  ewalletProvider.filtereditems.length,
                   (index) => Item(
                     gradientColor: LinearGradient(
                       colors: [
@@ -97,14 +101,14 @@ class EwalletPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset(
-                            ewalletModel[index].image,
+                            ewalletProvider.filtereditems[index].image,
                             width: 40,
                             height: 40,
                           ),
                         ),
                         const SizedBox(width: 5),
                         AutoSizeText(
-                          ewalletModel[index].title,
+                          ewalletProvider.filtereditems[index].title,
                           maxLines: 2,
                           style: TextStyle(color: white, fontSize: 18),
                         ),

@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:f_banking/src/features/education/model/education_model.dart';
-import 'package:f_banking/src/features/education/viewmodel/education_provider.dart';
-import 'package:f_banking/src/features/ewallet/models/ewallet_model.dart';
+import 'package:f_banking/src/features/education/model/education_data_model.dart';
+import 'package:f_banking/src/features/education/viewmodel/search_education_provider.dart';
 import 'package:f_banking/src/shared/components/activity.dart';
 import 'package:f_banking/src/shared/components/item.dart';
 import 'package:f_banking/src/shared/components/item_textfield.dart';
@@ -14,9 +13,15 @@ class EducationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final ewallet = Provider.of<EducationProvider>(context).items;
-    // List<EwalletModel> ewalletModel = EwalletModel.imageData();
-    List<EducationModel> education = EducationModel.itemData();
+    final searchEducation = Provider.of<SearchEducationProvider>(context);
+    Future.microtask(() {
+      if (searchEducation.filtereditems.isEmpty) {
+        searchEducation.init();
+      }
+    });
+
+    List<EducationDataModel> eduData = EducationDataModel.eduData();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
 
@@ -33,27 +38,29 @@ class EducationPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Text(
-              //   "Payment Activity",
-              //   style: TextStyle(
-              //     color: white,
-              //     fontSize: 25,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
-              // const SizedBox(height: 10),
+              Text(
+                "Payment Activity",
+                style: TextStyle(
+                  color: white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
 
-              // Activity(
-              //   itemCount: ewalletData.length,
-              //   titles: ewallet.map((e) => e.university).toList(),
-              //   subTitles: ewalletData.map((e) => e.university).toList(),
-              //   images:
-              //       ewalletData
-              //           .map((e) => Image.asset(e.image, fit: BoxFit.cover))
-              //           .toList(),
-              // ),
-              // const SizedBox(height: 10),
+              Activity(
+                itemCount: eduData.length,
+                titles: eduData.map((e) => e.university).toList(),
+                subTitles: eduData.map((e) => e.status).toList(),
+                images:
+                    eduData
+                        .map((e) => Image.asset(e.image, fit: BoxFit.cover))
+                        .toList(),
+              ),
+              const SizedBox(height: 10),
               ItemTextfield(
+                controller: searchEducation.searchController,
+                onChanged: searchEducation.searchItem,
                 gradientColor: LinearGradient(
                   colors: [const Color(0xFF2A3D55).withAlpha(50), darkBlue2],
                   begin: Alignment.bottomLeft,
@@ -76,7 +83,7 @@ class EducationPage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
-                  education.length,
+                  searchEducation.filtereditems.length,
                   (index) => Item(
                     gradientColor: LinearGradient(
                       colors: [
@@ -97,7 +104,7 @@ class EducationPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset(
-                            education[index].image,
+                            searchEducation.filtereditems[index].image,
                             width: 40,
                             height: 40,
                           ),
@@ -105,7 +112,7 @@ class EducationPage extends StatelessWidget {
                         const SizedBox(width: 5),
                         Expanded(
                           child: AutoSizeText(
-                            education[index].university,
+                            searchEducation.filtereditems[index].university,
                             maxLines: 2,
                             style: TextStyle(color: white, fontSize: 18),
                             overflow: TextOverflow.ellipsis,

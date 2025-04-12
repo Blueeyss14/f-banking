@@ -4,7 +4,7 @@ class EwalletDataModel {
 
   EwalletDataModel(this.image, this.ewallet, this.name);
 
-  static List<EwalletDataModel> itemData() {
+  static List<EwalletDataModel> ewalletData() {
     List<Map<String, dynamic>> datas = [
       {
         "image": "assets/img/shopeepay.png",
